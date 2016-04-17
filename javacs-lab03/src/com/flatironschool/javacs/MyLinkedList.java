@@ -85,7 +85,24 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
-		// TODO: fill this in
+		if (index < 0 || index > size) {
+			throw new IndexOutOfBoundsException();
+		} else {
+			//special case for adding at index = 0 
+			if(index == 0)
+				head = new Node(element,head);
+			// loop until the last node
+			int i = 0;
+			for (Node node = head ; node != null; node = node.next) {
+				if(i == index-1){
+					Node nextNode = node.next;
+					node.next = new Node(element,nextNode);
+				}
+				i++;
+			}
+		}
+		size++;
+
 	}
 
 	@Override
@@ -147,6 +164,15 @@ public class MyLinkedList<E> implements List<E> {
 	@Override
 	public int indexOf(Object target) {
 		// TODO: fill this in
+		// loop 
+		int i = 0;
+		for (Node node = head; node != null; node = node.next) {
+			if(node == null)
+				break; //end of list
+			if(equals(node.cargo,target))
+				return i;
+			i++;
+		}
 		return -1;
 	}
 
@@ -201,14 +227,51 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public boolean remove(Object obj) {
-		// TODO: fill this in
-		return false;
+		Node parent = null;
+		//System.out.println("before:" + Arrays.toString(this.toArray()));
+		//System.out.println("obj:" + obj);
+		for (Node node = head; node != null; node = node.next) {
+			if(equals(node.cargo,obj)){
+				size--;
+				if(parent == null){
+					head = node.next;
+					//System.out.println("after:" + Arrays.toString(this.toArray()));
+					return true;
+				}
+				else{
+					parent.next = node.next;
+					return true;
+				}
+			}
+			parent = node;
+		}
+		System.out.println("after:" + Arrays.toString(this.toArray()));
+		return false; //not in list
 	}
 
 	@Override
 	public E remove(int index) {
-		// TODO: fill this in
-		return null;
+		E element = null;
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		} else {
+			//special case for adding at index = 0 
+			if(index == 0)
+				head = head.next;
+				element = head.cargo;
+			// loop until the last node
+			int i = 0;
+			for (Node node = head ; node != null; node = node.next) {
+				if(i == index-1){
+					Node newNext = node.next.next;
+					element = node.next.cargo;
+					node.next = newNext;
+				}
+				i++;
+			}
+		}
+		size--;
+		return element;
 	}
 
 	@Override

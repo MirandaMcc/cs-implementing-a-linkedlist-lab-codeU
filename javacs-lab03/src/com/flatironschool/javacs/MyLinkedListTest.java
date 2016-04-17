@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import java.util.Arrays;
 
 /**
  * @author downey
@@ -198,24 +199,25 @@ public class MyLinkedListTest {
 		assertThat(flag, equalTo(true));
 		assertThat(mll.size(), is(2));
 		assertThat(mll.get(1), is(new Integer(3)));
-		//System.out.println(Arrays.toString(mal.toArray()));
+		//System.out.println(Arrays.toString(mll.toArray()));
 
 		flag = mll.remove(new Integer(1));
+		//System.out.println(Arrays.toString(mll.toArray()));
 		assertThat(flag, equalTo(true));
 		assertThat(mll.size(), is(1));
 		assertThat(mll.get(0), is(new Integer(3)));
-		//System.out.println(Arrays.toString(mal.toArray()));
+		
 		
 		flag = mll.remove(new Integer(5));
 		assertThat(flag, equalTo(false));
 		assertThat(mll.size(), is(1));
 		assertThat(mll.get(0), is(new Integer(3)));
-		//System.out.println(Arrays.toString(mal.toArray()));
+		//System.out.println(Arrays.toString(mll.toArray()));
 		
 		flag = mll.remove(new Integer(3));
 		assertThat(flag, equalTo(true));
 		assertThat(mll.size(), is(0));
-		//System.out.println(Arrays.toString(mal.toArray()));
+		//System.out.println(Arrays.toString(mll.toArray()));
 	}
 
 	/**
@@ -229,9 +231,9 @@ public class MyLinkedListTest {
 		assertThat(mll.get(1), is(new Integer(3)));
 	}
 
-	/**
-	 * Test method for {@link com.flatironschool.javacs.MyArrayList#removeAll(java.util.Collection)}.
-	 */
+
+	/** Test method for {@link com.flatironschool.javacs.MyArrayList#removeAll(java.util.Collection)}.
+	*/ 
 	@Test
 	public void testRemoveAll() {
 		mll.removeAll(list);
